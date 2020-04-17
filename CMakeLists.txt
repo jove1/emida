@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-project(EMIDA LANGUAGES CXX CUDA)
+project(EMIDA LANGUAGES C CXX CUDA)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,6 +14,7 @@ include(ExternalProject)
 if(UNIX)
   find_package(ZLIB REQUIRED)
   find_package(LibLZMA REQUIRED)
+  find_package(JPEG REQUIRED)
 endif()
 
 ExternalProject_Add(tiff_project
@@ -96,6 +97,8 @@ if(UNIX)
     target_link_libraries(emida_lib
         ${ZLIB_LIBRARIES}
         ${LIBLZMA_LIBRARIES}
+	${JPEG_LIBRARIES}
+	jbig
     )
 endif()
 
